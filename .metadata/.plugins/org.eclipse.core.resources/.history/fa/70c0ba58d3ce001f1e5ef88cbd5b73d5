@@ -1,0 +1,116 @@
+package Metodos;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Drivers.DriversFactory;
+
+public class MetodosDeTeste extends DriversFactory {
+
+	public void escrever(By elemento, String texto) {
+
+		driver.findElement(elemento).sendKeys(texto);
+	}
+
+	public void clicar(By elemento) {
+		driver.findElement(elemento).click();
+
+	}
+
+	public void validarUrl(String urlEsperada) {
+		String urlCapturada = driver.getCurrentUrl();
+		assertEquals(urlCapturada, urlEsperada);
+		if(urlEsperada.equals(urlCapturada)) {
+			System.out.println("As URL´s coicidem");
+		}else {
+			System.out.println("As URL´s não coincidem, a URL capturada foi " + urlCapturada);
+		}
+
+	}
+
+	public Boolean esperarUrl(String urlEsperando, int tempoEspera) {
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(tempoEspera));
+		return wait.until(ExpectedConditions.urlToBe(urlEsperando));
+
+	}
+
+	public void pegarAlert(String textoDoAlertEsperado) {
+		String textoCapturado = driver.switchTo().alert().getText();
+		assertEquals(textoCapturado, textoDoAlertEsperado);
+		if(textoDoAlertEsperado.equals(textoCapturado)) {
+			System.out.println("Os textos coicidem");
+		}else {
+			System.out.println("Os textos não coicidem, o texto capturado é " + textoCapturado);
+		}
+
+	}
+
+	public void pegarTextoNaClass(By elemento, String textoEsperado) {
+		String textoCapturado = driver.findElement(elemento).getText();
+		assertTrue(textoCapturado.contains(textoEsperado));
+		if(textoEsperado.equals(textoCapturado)) {
+			System.out.println("Os textos coicidem");
+		}else {
+			System.out.println("Os textos não coicidem, o texto capturado é " + textoCapturado);
+		}
+	}
+
+	public void esperarElementoSerVisivel(By elemento, int tempoDeEspera) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(tempoDeEspera));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(elemento));
+	}
+
+	public void pegarTextoNoElemento(By elemento, String textoEsperado) {
+		String textoCapturado = driver.findElement(elemento).getText();
+		assertEquals(textoCapturado, textoEsperado);
+		if(textoEsperado.equals(textoCapturado)) {
+			System.out.println("Os textos coicidem");
+		}else {
+			System.out.println("Os textos não coicidem, o texto capturado é " + textoCapturado);
+		}
+
+	}
+
+	public void esperarElementoSerClicavel(By elemento, int tempoEspera) {
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(tempoEspera));
+		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elemento));
+		element.click();
+
+	}
+
+	public void capturarScreenshot() {
+
+		String diretorio = "C:\\\\arquivos levi\\\\Evidencias testes automatizados";
+		String caminho = diretorio + "screenshot_" + System.currentTimeMillis() + ".png";
+		File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(screenshot, new File(caminho));
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		System.out.println("Screenshot salva em: " + caminho);
+
+	}
+	public void apagarTexto(By elemento) {
+		driver.findElement(elemento).clear();
+	}
+
+
+}

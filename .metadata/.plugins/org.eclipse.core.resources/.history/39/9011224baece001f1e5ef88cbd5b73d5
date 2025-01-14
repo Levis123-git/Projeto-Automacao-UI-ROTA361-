@@ -1,0 +1,47 @@
+package Pages;
+
+
+
+import org.openqa.selenium.By;
+
+import Metodos.MetodosDeTeste;
+
+public class CadastroPPRPage {
+
+	MetodosDeTeste metodo = new MetodosDeTeste();
+
+	
+	By btnLatLong = By.xpath("//div[text()=' Latitude / Longitude ']");
+	By campoNome = By.xpath("//input[contains(@class, 'q-field__native q-placeholder')][1]");
+	By campoLatitude = By.xpath("/html/body/div[3]/div/div[2]/div/form/div[3]/div[1]/div/div[1]/label/div/div[1]/div[1]//input[contains(@class, 'q-field__native q-placeholder')]");
+	By campoLongitude = By.xpath("/html/body/div[3]/div/div[2]/div/form/div[3]/div[1]/div/div[2]/label/div/div[1]/div//input[contains(@class, 'q-field__native q-placeholder')]");
+	By btnCadastrar = By.xpath("//span[text()='Cadastrar Item']");
+
+	public void cadastrarPPR(String nome, String latitude, String longitude) {
+
+		metodo.esperarElementoSerVisivel(By.xpath("//i[text()='menu']"), 2);
+		metodo.clicar(By.xpath("//i[text()='menu']"));
+		metodo.esperarElementoSerVisivel(By.xpath("//div[text()='Partida / Retorno']"), 2);
+		metodo.clicar(By.xpath("//div[text()='Partida / Retorno']"));
+		metodo.esperarElementoSerVisivel(By.xpath("//span[text()='Cadastrar']"), 2);
+		metodo.clicar(By.xpath("//span[text()='Cadastrar']"));	
+		metodo.escrever(this.campoNome, nome);
+		metodo.clicar(btnLatLong);
+		metodo.escrever(this.campoLatitude, latitude);
+		metodo.escrever(this.campoLongitude, longitude);
+		metodo.clicar(btnCadastrar);
+	}
+	
+	By consulta = By.xpath("");
+	
+	
+	public void consultarPPR () {
+		metodo.esperarElementoSerVisivel(By.xpath("//i[text()='menu']"), 2);
+		metodo.clicar(By.xpath("//i[text()='menu']"));
+		metodo.esperarElementoSerVisivel(By.xpath("//div[text()='Partida / Retorno']"), 2);
+		metodo.clicar(By.xpath("//div[text()='Partida / Retorno']"));
+		metodo.clicar(consulta);
+		
+	}
+
+}

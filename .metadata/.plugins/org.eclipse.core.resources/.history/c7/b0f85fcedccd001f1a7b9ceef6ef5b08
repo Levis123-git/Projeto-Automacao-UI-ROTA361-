@@ -1,0 +1,64 @@
+package Testes;
+
+
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+
+import Metodos.MetodosDeTeste;
+import Pages.CadastroPPRPage;
+import Pages.LoginPage;
+import Runner.Executa;
+
+public class cadastroPPRTest {
+
+	LoginPage login = new LoginPage();
+	CadastroPPRPage cadastro = new CadastroPPRPage();
+	MetodosDeTeste metodo = new MetodosDeTeste();
+
+	@Test
+	public void cadastroPPRSucesso() {
+		Executa.antesDosTestes();
+		login.logar("mateus@teste.com", "sponton3825.");
+		cadastro.cadastrarPPR("PPR teste", "-23.499727839835238", "-46.845637285819656");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//metodo.pegarTextoNaClass(By.xpath("//div[@class='q-notification__message col']"), "Item cadastrado");
+		metodo.capturarScreenshot();
+		Executa.depoisDosTestes();
+		
+	}
+	@Test
+	public void cadastroPPRInválido () {
+		Executa.antesDosTestes();
+		login.logar("mateus@teste.com", "sponton3825.");
+		cadastro.cadastrarPPR("PPR teste", "000", "000");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//metodo.pegarTextoNaClass(By.xpath("//div[@class='q-notification__message col']"), "Endereço Invalido");
+		//metodo.capturarScreenshot();
+		Executa.depoisDosTestes();
+		
+	}
+	@Test
+	public void cadastroPPREmBranco () {
+		Executa.antesDosTestes();
+		login.logar("mateus@teste.com", "sponton3825.");
+		cadastro.cadastrarPPR("", "", "");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		metodo.pegarTextoNoElemento(By.xpath("//div[@role='alert']"), "campo obrigatório");
+		//metodo.capturarScreenshot();
+		Executa.depoisDosTestes();
+		
+	}
+
+}

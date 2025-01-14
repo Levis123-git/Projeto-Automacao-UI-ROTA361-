@@ -1,0 +1,16 @@
+package Testes;
+
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+
+import Metodos.MetodosDeTeste;
+import Pages.LoginPage;
+import Runner.Executa;
+
+public class LogoutTest {
+	LoginPage login = new LoginPage();
+	MetodosDeTeste metodo = new MetodosDeTeste();
+
+	
+
+}
