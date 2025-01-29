@@ -87,8 +87,8 @@ A organização do projeto segue a estrutura padrão recomendada pelo Cypress:
 
  ```bash
 src/test/Java/
-├── Drivers/					# Arquivo de Drivers do selenium
-├── Elementos/                  # Arquivos de Elementos WEB
+├── Drivers/				# Arquivo de Drivers do selenium
+├── Elementos/                          # Arquivos de Elementos WEB
 ├── Metodos/              		# Arquivos de metodos de teste (Ações executáveis)
 ├── Pages/                		# Arquivo de Pagina Web, todos os elementos que compôe aquela funcionalidade em específico
 ├── Runner/          			# Executor para os testes (Antes e depois [abrir e fechar navegador])
